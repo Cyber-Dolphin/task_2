@@ -4,7 +4,7 @@
 
 - name: Copy file for build zookeeper
   ansible.builtin.copy:
-  src: ../../deb-package/*
+  src: ../deb-package/zookeeper/
   dest: /home/autodoria/zookeeper/
 
 - name: Build deb package zookeeper
