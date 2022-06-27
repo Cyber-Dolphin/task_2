@@ -1,0 +1,1 @@
+packer build -force -var 'version=1.0.2' ubuntu-config.json

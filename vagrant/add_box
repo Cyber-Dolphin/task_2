@@ -1,0 +1,1 @@
+vagrant box add --name=autodoria_ubuntu 'F:\DevSecOps\WORK\Sobes\test_autodoria\packer\ubuntu\autodoria_ubuntu_virtualbox.box'

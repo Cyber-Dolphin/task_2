@@ -1,0 +1,38 @@
+- name: Install zookeeper
+  apt: deb=/home/autodoria/zookeeper.deb dpkg_options='force-confold,force-confdef'
+
+- name: Create group "zookeeper" exists
+  ansible.builtin.group:
+    name: zookeeper
+    state: present
+
+- name: Create user zookeeper
+  ansible.builtin.user:
+    name: zookeeper
+    shell: /bin/bash
+    groups: zookeeper
+    append: yes
+
+- name: Change owner for zookeeper directory /opt/zookeeper
+  ansible.builtin.file:
+    path: /opt/zookeeper
+    owner: zookeeper
+    group: zookeeper
+    recurse: true
+
+- name: Change owner for zookeeper directory /data/zookeeper
+  ansible.builtin.file:
+    path: /data/zookeeper
+    owner: zookeeper
+    group: zookeeper
+    recurse: true
+
+- name: Restart service zookeeper
+  ansible.builtin.service:
+    name: zookeeper
+    state: restarted
+
+- name: Enable service zookeeper
+  ansible.builtin.service:
+    name: zookeeper
+    enabled: yes

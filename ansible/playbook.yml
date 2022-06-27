@@ -1,0 +1,7 @@
+- hosts: 'zookeeper-autodoria'
+  become: true
+  vars_files:
+    - 'host_vars/zookeeper'
+  roles:
+    - 'zookeeper-deploy'
+    - 'zookeeper-install'

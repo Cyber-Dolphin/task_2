@@ -1,0 +1,11 @@
+- name: Install required system packages
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'python3-pip', 'python-dev', 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg2', 'software-properties-common', 'python-setuptools', 'libcppunit-dev', 'build-essential', 'libboost-all-dev', 'cmake', 'flex', 'libtool', 'ant']
+
+- name: Copy file for build zookeeper
+  ansible.builtin.copy:
+  src: ../../deb-package/*
+  dest: /home/autodoria/zookeeper/
+
+- name: Build deb package zookeeper
+  command: dpkg-deb --build /home/autodoria/zookeeper
