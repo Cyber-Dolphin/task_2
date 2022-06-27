@@ -3,5 +3,5 @@
   vars_files:
     - 'host_vars/zookeeper'
   roles:
-    - 'zookeeper-deploy'
+    - 'zookeeper-build'
     - 'zookeeper-install'
