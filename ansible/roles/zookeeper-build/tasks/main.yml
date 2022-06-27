@@ -1,4 +1,4 @@
-- name: Install required system packages
+- name: Install required system packages for build deb
   apt: name={{ item }} state=latest update_cache=yes
   loop: [ 'python3-pip', 'python-dev', 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg2', 'software-properties-common', 'python-setuptools', 'libcppunit-dev', 'build-essential', 'libboost-all-dev', 'cmake', 'flex', 'libtool', 'ant']
 
@@ -7,20 +7,22 @@
     src: ../deb-package/zookeeper/
     dest: /home/autodoria/zookeeper/
 
-- name: Get zookeeper archive
-  ansible.builtin.get_url:
-    url: https://dlcdn.apache.org/zookeeper/zookeeper-3.5.10/apache-zookeeper-3.5.10-bin.tar.gz
-    dest: /home/autodoria/zookeeper/
-
 - name: Unzip zookeeper archive
   ansible.builtin.unarchive:
-    src: /home/autodoria/zookeeper/apache-zookeeper-3.5.10-bin.tar.gz
-    dest: /home/autodoria/zookeeper/opt/
+    src: https://dlcdn.apache.org/zookeeper/zookeeper-3.5.10/apache-zookeeper-3.5.10-bin.tar.gz
+    dest: /tmp
+    remote_src: yes
 
-- name: Delete tmp file
+- name: Copy zookeeper files
+  ansible.builtin.copy:
+    src: /tmp/apache-zookeeper-3.5.10-bin/
+    dest: /home/autodoria/zookeeper/opt/zookeeper/
+    remote_src: yes
+
+- name: Delete zookeeper archive 
   file:
     state: absent
-    path: /home/autodoria/zookeeper/tmp/apache-zookeeper-3.5.10-bin.tar.gz
+    path: /tmp/apache-zookeeper-3.5.10-bin/
 
 - name: Build deb package zookeeper
   command: dpkg-deb --build /home/autodoria/zookeeper
