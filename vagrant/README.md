@@ -30,7 +30,7 @@ vagrant box add --name=<BOX_NAME> <PATH_BOX>
 
 Example:
 
-vagrant box add --name=cyberdolphin_debian F:\packer_debian\cyberdolphin_debian.box
+vagrant box add --name=autodoria_ubuntu F:\packer\autodoria_ubuntu.box
 
 P.S. For windows 10, specify the full path
 
