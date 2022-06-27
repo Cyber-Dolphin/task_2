@@ -10,17 +10,17 @@
 - name: Get zookeeper archive
   ansible.builtin.get_url:
     url: https://dlcdn.apache.org/zookeeper/zookeeper-3.5.10/apache-zookeeper-3.5.10-bin.tar.gz
-    dest: /home/autodoria/zookeeper/tmp/
+    dest: /home/autodoria/zookeeper/
 
 - name: Unzip zookeeper archive
   ansible.builtin.unarchive:
-    src: /home/autodoria/zookeeper/tmp/apache-zookeeper-3.5.10-bin.tar.gz
+    src: /home/autodoria/zookeeper/apache-zookeeper-3.5.10-bin.tar.gz
     dest: /home/autodoria/zookeeper/opt/
 
 - name: Delete tmp file
   file:
     state: absent
-    path: /home/autodoria/zookeeper/tmp/
+    path: /home/autodoria/zookeeper/tmp/apache-zookeeper-3.5.10-bin.tar.gz
 
 - name: Build deb package zookeeper
   command: dpkg-deb --build /home/autodoria/zookeeper
