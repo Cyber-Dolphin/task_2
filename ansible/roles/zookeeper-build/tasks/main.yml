@@ -4,8 +4,23 @@
 
 - name: Copy file for build zookeeper
   ansible.builtin.copy:
-  src: ../deb-package/zookeeper/
-  dest: /home/autodoria/zookeeper/
+    src: ../deb-package/zookeeper/
+    dest: /home/autodoria/zookeeper/
+
+- name: Get zookeeper archive
+  ansible.builtin.get_url:
+    url: https://dlcdn.apache.org/zookeeper/zookeeper-3.5.10/apache-zookeeper-3.5.10-bin.tar.gz
+    dest: /home/autodoria/zookeeper/tmp/
+
+- name: Unzip zookeeper archive
+  ansible.builtin.unarchive:
+    src: /home/autodoria/zookeeper/tmp/apache-zookeeper-3.5.10-bin.tar.gz
+    dest: /home/autodoria/zookeeper/opt/
+
+- name: Delete tmp file
+  file:
+    state: absent
+    path: /home/autodoria/zookeeper/tmp/
 
 - name: Build deb package zookeeper
   command: dpkg-deb --build /home/autodoria/zookeeper
