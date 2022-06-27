@@ -36,3 +36,8 @@
   ansible.builtin.service:
     name: zookeeper
     enabled: yes
+
+- name: Allow port 2181 for zookeeper
+  ufw:
+    rule: allow
+    port: 2181
