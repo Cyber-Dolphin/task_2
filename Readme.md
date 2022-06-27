@@ -10,3 +10,31 @@
 На странице проекта данного пакета должен быть выложен список команд для сборки пакета и проверки работы (smoke test) сервиса zookeeper после установки сервиса из данного пакета.
 
 Все исходники управления конфигурациями и сборки пакеты выложить на github.
+
+---
+
+Пдготовка:
+
+PACKER:
+
+Необходимо заменить значения на свои:
+
+1. authorized_keys на свой https://github.com/Cyber-Dolphin/task_2/blob/main/packer/ubuntu/scripts/start-config.sh#L31
+2. пароль для пользователя на свой выполнив команду echo 'mypassword' | openssl passwd -1 -stdin и добавив хэш в https://github.com/Cyber-Dolphin/task_2/blob/main/packer/ubuntu/scripts/start-config.sh#L57
+
+После замены учетных данных необходимо собрать образ для vagrant:
+
+1. packer build -force -var 'version=1.0.2' ubuntu-config.json
+
+SSH: 
+
+Для запуска стенда используются ssh ключи, поэтому для успешного запуска необходимо добавить директорию ssh с приватным ключом или заменить путь в:
+
+1. https://github.com/Cyber-Dolphin/task_2/blob/main/ansible/host_vars/zookeeper#L3
+
+P.S. Для папки ssh необходимо установить права 700, для приватного ключа 600, иначе ansible выдаст ошибку.
+
+Запуск:
+
+Для запуска стенда перейти в директорию vagrant и выполнить vagrant up
+
