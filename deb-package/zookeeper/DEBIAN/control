@@ -1,7 +1,7 @@
 Package: zookeeper-autodoria
 Version: 3.5.10
-Section: base 
-Priority: optional 
-Architecture: all  
-Maintainer: lol.maxpower@yandex.ru 
+Section: base
+Priority: optional
+Architecture: all
+Maintainer: lol.maxpower@yandex.ru
 Description: Run zookeeper as a service.
